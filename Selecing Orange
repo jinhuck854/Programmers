@@ -1,0 +1,80 @@
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
+
+// tangerine_len은 배열 tangerine의 길이입니다.
+int solution(int k, int tangerine[], size_t tangerine_len) {
+    int answer = 0;
+
+    // tangerine 배열 내림차순 정렬 : select sort
+    int temp; // sort -> swap 임시 변수
+    int indexMax; // Select Sort
+    
+    for (int i = 0; i < tangerine_len - 1; i++) {
+        indexMax = i;
+        for (int j = i+1; j < tangerine_len; j++) {
+            if (tangerine[j] > tangerine[indexMax]) {
+                indexMax = j;
+            }
+            temp = tangerine[indexMax];
+            tangerine[indexMax] = tangerine[i];
+            tangerine[i] = temp;
+        }
+    }
+
+    // 같은 크기의 개수를 array[] 배열에 넣음
+    int number = 0;
+    int count1 = 0;
+    int array[100000]; // 개수 
+    for (int i = 0; i < tangerine_len - 1; i++) {
+        if (tangerine[i] == tangerine[i + 1]) {
+            number++;
+        }
+        else if(tangerine[i+1] < 0){
+            break;
+        }
+        else {
+            number++;
+            array[count1++] = number;
+            if (i == (tangerine_len - 2)) {
+                array[count1++] = 1;
+            }
+            number = 0;
+        }
+    }
+
+    // array[] 배열 내림차순 정렬
+    int Max;
+    for (int i = 0; i < tangerine_len - 1; i++) {
+        Max = i;
+        if(tangerine[i] < 0){
+            break;
+        }
+        for (int j = i + 1; j < tangerine_len; j++) {
+            if (array[j] > array[Max]) {
+                Max = j;
+            }
+            temp = array[Max];
+            array[Max] = array[i];
+            array[i] = temp;
+        }
+    }
+    
+    // k보다 크거나 같을 때까지 temp_answer에 array[i] 순서대로 더하고, 더할때마다 answer++
+    int temp_answer = 0; // temp_answer > key 조건
+    for (int i = 0; i < tangerine_len; i++) {
+        if(array[i] < 0){
+            return answer;
+        }
+        temp_answer += array[i];
+        if (temp_answer >= k) {
+            answer++;
+            return answer;
+        }
+        else {
+            answer++;
+        }
+    }
+    return answer;
+
+}
