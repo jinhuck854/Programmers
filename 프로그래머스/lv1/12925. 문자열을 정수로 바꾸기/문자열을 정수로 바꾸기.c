@@ -6,5 +6,5 @@
 int solution(const char* s) {
     int answer = 0;
     
-    return answer = atoi(s);
+    return answer = atoi(s); // atoi 사용되나? 싶었는데 됨.
  }
