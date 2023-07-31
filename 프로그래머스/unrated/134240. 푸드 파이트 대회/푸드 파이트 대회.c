@@ -27,7 +27,6 @@ char* solution(int food[], size_t food_len) {
                 sprintf(answer+index, "%d", food_num);
                 index++;
             }
-            
         }
         food_num++;
     }
@@ -49,7 +48,6 @@ char* solution(int food[], size_t food_len) {
             }
         }
         food_num--;
-        printf("%d", i);
     }
     
     return answer;
