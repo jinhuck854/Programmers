@@ -18,10 +18,8 @@ long long solution(int n) {
         for(int i = 3; i<=n; i++){
             array[i] = (array[i-1] + array[i-2]) % 1234567;
             answer = array[i];
-            //answer = (array[i-1] + array[i-2]) % 1234567;
-            //printf("i-1 : %d, i-2 : %d\n", array[i-1], array[i-2]);
         }
     }
     
-    return answer;
+    return (answer % 1234567);
 }
