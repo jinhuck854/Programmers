@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
+
 int swap(int *array[], k){ // 내림차순
     for(int i = 0; i< k-1; i++){
         int index = i;
@@ -12,11 +13,6 @@ int swap(int *array[], k){ // 내림차순
         array[index] = array[i];
         array[i] = temp;
     }
-    /*
-    for(int i = 0; i<k; i++)
-        printf("%d %d\n", i, array[i]);
-    printf(" end\n");
-    */
 }
 
 int* solution(int k, int score[], size_t score_len) {
@@ -25,17 +21,14 @@ int* solution(int k, int score[], size_t score_len) {
     int* array[score_len];
     
     for(int i = 0; i<score_len; i++){
-        array[i] = score[i];
-        
+        array[i] = score[i]; // 값 넣기
+
         swap(array, i+1); // 선택정렬
         
-        if(i < k){ // 0~k번째까지 // k=3, 0 1 2
+        if(i < k) // 0 ~ (k-1)까지
             answer[i] = array[i];
-        }
-        else{ // k번째~score_len까지
+        else // k ~ score_len까지
             answer[i] = array[k-1];
-        }
-        
     }
     return answer;
 }
